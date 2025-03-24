@@ -8,61 +8,69 @@
 import { getGapClasses, getSpacingClasses } from "../../../utils/spacing";
 
 interface Props {
-	/**
-	 * コンポーネントに適用するクラス名
-	 */
-	componentClass?: string;
+  /**
+   * コンポーネントに適用するクラス名
+   */
+  componentClass?: string;
 
-	/**
-	 * 追加のクラス名
-	 */
-	class?: string;
+  /**
+   * 追加のクラス名
+   */
+  class?: string;
 
-	/**
-	 * 使用するHTML要素
-	 * @default "div"
-	 */
-	Element?: keyof HTMLElementTagNameMap;
+  /**
+   * 使用するHTML要素
+   * @default "div"
+   */
+  Element?: keyof HTMLElementTagNameMap;
 
-	/**
-	 * パディング値
-	 * 数値として渡された場合、スペーシングシステムの値に変換されます
-	 */
-	padding?: string;
+  /**
+   * パディング値
+   * CSSのショートハンド記法をサポート:
+   * - "1" - 全方向に同じ値を適用
+   * - "1 2" - ブロック方向（上下）とインライン方向（左右）に異なる値を適用
+   * - "1 2 3" - 上、左右、下に異なる値を適用
+   * - "1 2 3 4" - 上、右、下、左に異なる値を適用
+   */
+  padding?: string;
 
-	/**
-	 * マージン値
-	 * 数値として渡された場合、スペーシングシステムの値に変換されます
-	 */
-	margin?: string;
+  /**
+   * マージン値
+   * CSSのショートハンド記法をサポート:
+   * - "1" - 全方向に同じ値を適用
+   * - "1 2" - ブロック方向（上下）とインライン方向（左右）に異なる値を適用
+   * - "1 2 3" - 上、左右、下に異なる値を適用
+   * - "1 2 3 4" - 上、右、下、左に異なる値を適用
+   */
+  margin?: string;
 
-	/**
-	 * ギャップ値（単一または二次元）
-	 * 単一値または "2 3" のようなスペース区切りの値として渡すことができます
-	 */
-	gap?: string;
+  /**
+   * ギャップ値（単一または二次元）
+   * 単一値または "2 3" のようなスペース区切りの値として渡すことができます
+   */
+  gap?: string;
 
-	/**
-	 * サイズ値
-	 * 数値として渡された場合、スペーシングシステムの値に変換されます
-	 */
-	size?: string;
+  /**
+   * サイズ値
+   * 数値として渡された場合、スペーシングシステムの値に変換されます
+   */
+  size?: string;
 
-	/**
-	 * その他の属性を許可（型安全に）
-	 */
-	[key: string]: unknown;
+  /**
+   * その他の属性を許可（型安全に）
+   */
+  [key: string]: unknown;
 }
 
 const {
-	componentClass,
-	class: className,
-	Element = "div",
-	padding,
-	margin,
-	gap,
-	size,
-	...rest
+  componentClass,
+  class: className,
+  Element = "div",
+  padding,
+  margin,
+  gap,
+  size,
+  ...rest
 } = Astro.props;
 
 // クラスを生成( )

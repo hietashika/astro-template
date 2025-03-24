@@ -81,6 +81,35 @@
   &.#{$prefix}--10#{$selector-text} { #{$property}: var(--space-8xl); } // 384px
 }
 
+// 方向付きのスペーシング制御用ミックスイン（ショートハンド対応）
+// $base-property: 基本となるCSSプロパティ名（例：--box-padding, --box-margin）
+// $prefix: クラスのプレフィックス（例：padding, margin）
+@mixin directional-spacing-classes($base-property, $prefix) {
+  // 基本的なスペーシングクラス（全方向共通）
+  @include spacing-classes($base-property, $prefix);
+  
+  // 方向別のスペーシングクラス
+  // 上下左右の方向ごとに個別のプロパティを提供
+  
+  // 上方向
+  @include spacing-classes("#{$base-property}-top", "#{$prefix}Top");
+  
+  // 右方向
+  @include spacing-classes("#{$base-property}-right", "#{$prefix}Right");
+  
+  // 下方向
+  @include spacing-classes("#{$base-property}-bottom", "#{$prefix}Bottom");
+  
+  // 左方向
+  @include spacing-classes("#{$base-property}-left", "#{$prefix}Left");
+  
+  // ブロック方向（上下）
+  @include spacing-classes("#{$base-property}-block", "#{$prefix}Block");
+  
+  // インライン方向（左右）
+  @include spacing-classes("#{$base-property}-inline", "#{$prefix}Inline");
+}
+
 // 二次元ギャップ処理用ミックスイン
 // コンポーネントがrow-gapとcolumn-gapの両方を持つ場合に使用
 // $base-property: ベースとなるCSSプロパティ（例：--cluster-gap）
@@ -196,8 +225,6 @@
     // 共通のベーススタイル
     
     // スペーシングとギャップの共通変数
-    --#{$name}-padding: var(--space-m);
-    --#{$name}-margin: 0;
     --#{$name}-gap: var(--space-m);
     
     // 子クラス固有のスタイルはこの後に記述

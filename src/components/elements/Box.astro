@@ -15,10 +15,12 @@ interface Props {
   /**
    * 背景色の種類を指定
    * - primary: 高コントラスト背景色
-   * - middle: 中程度コントラスト背景色
-   * - low: 低コントラスト背景色
+   * - secondary: 中程度コントラスト背景色
+   * - tertiary: 低コントラスト背景色
+   * - quaternary: 非常に低コントラスト背景色
+   * - accent: アクセント色
    */
-  surface?: "primary" | "secondary" | "tertiary";
+  surface?: "primary" | "secondary" | "tertiary" | "quaternary" | "accent";
 
   /**
    * ボーダーを含めるかどうか
@@ -79,28 +81,52 @@ const baseProps = {
    * Boxコンポーネントのスタイル
    */
   @include element-base("box") {
+    padding: var(
+      --box-padding,
+      var(--box-padding-block, var(--box-padding-top, 0))
+        var(
+          --box-padding,
+          var(--box-padding-inline, var(--box-padding-right, 0))
+        )
+        var(
+          --box-padding,
+          var(--box-padding-block, var(--box-padding-bottom, 0))
+        )
+        var(
+          --box-padding,
+          var(--box-padding-inline, var(--box-padding-left, 0))
+        )
+    );
     background-color: transparent;
     outline: 0.125rem solid transparent;
     outline-offset: -0.125rem;
 
-    /* スペーシングクラスの適用 */
-    @include spacing-classes("--box-padding", "padding");
-    @include spacing-classes("--box-margin", "margin");
+    /* スペーシングクラスの適用 - ショートハンド対応版 */
+    @include directional-spacing-classes("--box-padding", "padding");
+    @include directional-spacing-classes("--box-margin", "margin");
 
     /**
      * サーフェスバリエーション
      * 異なる背景色を提供するモディファイア
      */
     &--surfacePrimary {
-      background-color: var(--color-background-high);
+      background-color: var(--color-background-primary);
     }
 
     &--surfaceSecondary {
-      background-color: var(--color-background-middle);
+      background-color: var(--color-background-secondary);
     }
 
     &--surfaceTertiary {
-      background-color: var(--color-background-low);
+      background-color: var(--color-background-tertiary);
+    }
+
+    &--surfaceQuaternary {
+      background-color: var(--color-background-quaternary);
+    }
+
+    &--surfaceAccent {
+      background-color: var(--color-background-accent);
     }
   }
 </style>

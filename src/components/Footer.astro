@@ -1,23 +1,18 @@
 ---
+import Box from "@elements/Box.astro";
 interface Props {
-	class?: string;
+  class?: string;
 }
 
 const { class: className, ...rest } = Astro.props as Props;
 ---
 
-<footer class={className} {...rest}>
-	<p>フッター</p>
-</footer>
-
-<style lang="scss">
-	footer {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding-block: var(--space-m);
-		background-color: #f0f0f0;
-	}
-</style>
-
-
+<Box
+  Element="footer"
+  padding="5 4 3 2"
+  surface="secondary"
+  class={className}
+  {...rest}
+>
+  <p>フッター</p>
+</Box>
